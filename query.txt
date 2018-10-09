@@ -1,0 +1,2 @@
+-- show all tables
+SELECT * FROM information_schema.tables where table_schema='cwp12';

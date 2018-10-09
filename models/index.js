@@ -11,7 +11,7 @@ module.exports = (Sequelize, config) => {
   });
   
   sequelize.authenticate().then(() => {
-      console.log('Success');
+      console.log('\r\n\t --- Success init --- \r\n');
   }).catch((err) => {
       console.log(`Error connect ${err}`);
   });
@@ -20,7 +20,20 @@ module.exports = (Sequelize, config) => {
   const weapons = Weapon(Sequelize, sequelize);
   const pizzas = Pizza(Sequelize, sequelize);
 
-  // TODO: создание связей между таблицами
+  turtles.belongsTo(pizzas, {
+      foreignKey: 'firstFavouritePizzaId', 
+      as: 'firstFavouritePizza'
+  });
+  
+  turtles.belongsTo(pizzas, {
+      foreignKey: 'secondFavouritePizzaId',
+      as: 'secondFavouritePizza'
+  });
+
+  turtles.belongsTo(weapons, {
+      foreignKey: 'weaponId',
+      as: 'weapon'
+  });
 
   return {
     turtles,
