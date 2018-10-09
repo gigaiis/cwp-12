@@ -3,7 +3,18 @@ const Weapon = require('./weapon');
 const Pizza = require('./pizza');
 
 module.exports = (Sequelize, config) => {
-  // TODO: создание объекта для подключения к базе - sequelize
+  const sequelize = new Sequelize(config.db, config.login, config.password,
+  {
+      host: config.host,
+      dialect: config.dialect,
+      logging: false
+  });
+  
+  sequelize.authenticate().then(() => {
+      console.log('Success');
+  }).catch((err) => {
+      console.log(`Error connect ${err}`);
+  });
 
   const turtles = Turtle(Sequelize, sequelize);
   const weapons = Weapon(Sequelize, sequelize);
