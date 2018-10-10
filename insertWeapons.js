@@ -1,4 +1,4 @@
-module.exports = async function (db) {
+module.exports = async (db) => {
     return Promise.all(
         [
             db.weapons.create({
@@ -7,21 +7,19 @@ module.exports = async function (db) {
             }),
             db.weapons.create({
                 name: 'pole',
-                dps: 75
+                dps: 73
             }),
             db.weapons.create({
                 name: 'nunchuck',
-                dps: 123
+                dps: 155
             }),db.weapons.create({
                 name: 'sais',
                 dps: 101
             })        
         ]
-    )
-    .then(() => {
+    ).then(() => {
         console.log('insert weapons completed');
-    })
-    .catch((err) => {
+    }).catch((err) => {
         console.log(err);
     })
 }

@@ -29,22 +29,23 @@ const db = require('./models')(Sequelize, config);
 	});
 
     console.log('\r\n\t --- TASK 03 [ Unique favourite pizzas ] --- \r\n');
-    //(await db.turtles.findAll({
-    //    group: 'firstFavouritePizzaId',
-    //     include: [{
-    //        model: db.pizzas,
-    //        as: 'firstFavouritePizza'
-    //    }]
-    //})).forEach((v) => {
-    //    console.log(v.firstFavouritePizza.name);
-    //});
+    (await db.turtles.findAll({
+        // group: 'firstFavouritePizzaId',
+        include: [{
+            model: db.pizzas,
+            as: 'firstFavouritePizza'
+        }]
+    })).forEach((v) => {
+    	let obj = v.dataValues.firstFavouritePizza.dataValues;
+    	console.log(`for ${v.dataValues.name} => id = ${obj.id}, name = ${obj.name}`);
+    });
 
 	console.log('\r\n\t --- TASK 04 [ Create new turtles ] --- \r\n');
     await db.turtles.create({
         name: 'Egor',
         color: 'red',
         weaponId: 4,
-        firstFavouritePizzaId: 4,
+        firstFavouritePizzaId: 2,
         secondFavouritePizzaId: 1
     }).then(function(row) {
     	console.log(row.dataValues);
@@ -89,17 +90,19 @@ const db = require('./models')(Sequelize, config);
     });
 
 	console.log('\r\n\t --- TASK 08 [ Add pizza for turtle ] --- \r\n');
-	//8. Добавим пятой черепашке любимую пиццу через объект черепахи
 
-	(await db.turtles.findAll({
+	(await db.turtles.update(
+	{
+		firstFavouritePizzaId: 2
+	},
+	{
 		where: {
 			id: 5
 		}
-	})).forEach((val) => {
-		// asdsadasdasdsad
-        console.log(`Name = ${val.name}`);
+	}
+	)).forEach((row) => {
+        console.log(`Updated!`);
     });
-
 
     console.log('\r\n\t --- End main block --- \r\n');
 })();

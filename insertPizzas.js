@@ -1,10 +1,15 @@
-module.exports = async function (db) {
+module.exports = async (db) => {
     return Promise.all(
         [
             db.pizzas.create({
                 name: 'mozzarella',
                 description: 'peperoni, ham, champignons, mozzarell, basil',
                 calories: 3500
+            }),  
+            db.pizzas.create({
+                name: 'hawaiian',
+                description: 'cheese sauce, ham, chicken, pineapple, mozzarell',
+                calories: 2000
             }),
             db.pizzas.create({
                 name: 'country',
@@ -15,11 +20,6 @@ module.exports = async function (db) {
                 name: 'four seasons',
                 description: 'mustard, hunting sausages, bulgarian pepper, onion, tomatoes, mozzarell',
                 calories: 3200
-            }),
-            db.pizzas.create({
-                name: 'hawaiian',
-                description: 'cheese sauce, ham, chicken, pineapple, mozzarell',
-                calories: 2000
             }),
             db.pizzas.create({
                 name: 'mushroom',

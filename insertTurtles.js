@@ -1,4 +1,4 @@
-module.exports = async function (db) {
+module.exports = async (db) => {
     return Promise.all(
         [
             db.turtles.create({
@@ -30,11 +30,9 @@ module.exports = async function (db) {
                 secondFavouritePizzaId: 1
             })       
         ]
-    )
-    .then(() => {
+    ).then(() => {
         console.log('insert turtles completed');
-    })
-    .catch((err) => {
+    }).catch((err) => {
         console.log(err);
     })
 }
